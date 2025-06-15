@@ -1,14 +1,16 @@
 package ru.alishev.springcourse.models;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+
 /**
  * @author Neil Alishev
  */
+
+
 @Entity
 @Table(name = "Person")
 public class Person {
@@ -30,6 +32,7 @@ public class Person {
     @NotEmpty(message = "Email should not be empty")
     @Email
     private String email;
+
 
     public Person() {
 
@@ -72,6 +75,7 @@ public class Person {
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     @Override
     public String toString() {
