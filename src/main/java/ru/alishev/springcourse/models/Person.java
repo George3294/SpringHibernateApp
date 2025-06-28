@@ -1,9 +1,12 @@
 package ru.alishev.springcourse.models;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -32,6 +35,20 @@ public class Person {
     @NotEmpty(message = "Email should not be empty")
     @Email
     private String email;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Item> items;
+
+    @Column(name = "date_of_birth")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date dateOfBirth;
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private Mood mood;
 
 
     public Person() {
@@ -76,6 +93,37 @@ public class Person {
         this.email = email;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Mood getMood() {
+        return mood;
+    }
+
+    public void setMood(Mood mood) {
+        this.mood = mood;
+    }
 
     @Override
     public String toString() {
